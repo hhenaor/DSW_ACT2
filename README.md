@@ -18,4 +18,3 @@ Path: <<tomcat installation path>>/webapps/root/
 
 This project is licensed under the terms of the GNU General Public License version 3.0 (GPLv3).
 See the LICENSE file for details.
-
