@@ -40,3 +40,70 @@ webapps/*/WEB-INF/lib/*.jar
 # JSP
 *.jsp.java
 *.jsp.class
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.nb-gradle/
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven specific
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Log files
+*.log
+logs/
+
+# IDE specific (opcional)
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Configuración local o secretos
+src/main/resources/application-local.properties
+src/main/resources/application-dev.properties
+*.properties.local
+config.properties
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Carpetas generadas
+gen/
+out/
+bin/
+
+# Archivos de base de datos
+*.mdb
+*.ldb
+*.sqlite
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
