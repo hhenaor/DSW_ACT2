@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author horahenaripo
- */
 public class CRUDstudent {
 
     private student student;
@@ -22,7 +14,6 @@ public class CRUDstudent {
     }
 
     public void agregarStudent(student nuevoStudent) throws Exception {
-
         if (nuevoStudent.getUsername() == null || nuevoStudent.getUsername().isEmpty()) {
             throw new Exception("El username del estudiante es necesario");
         }
@@ -40,14 +31,13 @@ public class CRUDstudent {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Agregar el Estudiante " + nuevoStudent.getUsername() + "\nExplicacion: " + ex.getMessage()); // Formato de error de la imagen
+            throw new Exception("Error al Agregar el Estudiante " + nuevoStudent.getUsername() + "\nExplicacion: " + ex.getMessage());
         } finally {
             this.conexion.desconectar();
         }
     }
 
     public void modificarStudent(student studentAModificar) throws Exception {
-
         if (studentAModificar.getUsername() == null || studentAModificar.getUsername().isEmpty()) {
             throw new Exception("El Username del Estudiante es Necesario para Modificar");
         }
@@ -65,7 +55,7 @@ public class CRUDstudent {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Modificar el Estudiante " + studentAModificar.getUsername() + "\nExplicacion: " + ex.getMessage()); // Formato de error de la imagen
+            throw new Exception("Error al Modificar el Estudiante " + studentAModificar.getUsername() + "\nExplicacion: " + ex.getMessage());
         } finally {
             this.conexion.desconectar();
         }
@@ -113,7 +103,6 @@ public class CRUDstudent {
             ResultSet resultado = conexion.consultar(sentenciaSQL);
 
             if (resultado.next()) {
-
                 String name = resultado.getString("name");
                 String email = resultado.getString("email");
                 encontrado = new student(username, password, name, email);
@@ -144,7 +133,6 @@ public class CRUDstudent {
         student[] listado = null;
 
         try {
-
             conexion = new ConexionBaseDeDatos();
 
             sentenciaSQL = conexion.crearSentencia(sqlSelect);
@@ -197,5 +185,4 @@ public class CRUDstudent {
             }
         }
     }
-
 }

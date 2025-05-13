@@ -1,9 +1,3 @@
-<%-- 
-    Document   : router
-    Created on : 12 may 2025, 18:09:11
-    Author     : horahenaripo
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,7 +9,6 @@
         String redirTo = request.getParameter("redir_to");
 
         String destinoUrl = (redirTo != null && !redirTo.isEmpty()) ? redirTo : "login.jsp";
-
     %>
     <script>
         function autoRedirect() { window.location.href = '<%= destinoUrl %>'; }
@@ -36,8 +29,6 @@
 
     <p>Seras redireccionado en unos momentos</p>
     <p><a href="<%= destinoUrl %>">Haz clic aqui para ir ahora.</a></p>
-
-
 
 </body>
 </html>

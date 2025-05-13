@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
-/**
- *
- * @author horahenaripo
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,7 +43,6 @@ public class ConexionBaseDeDatos {
         this.db = db;
 
         this.conectar();
-
     }
 
     public void conectar() throws Exception {
@@ -65,7 +56,6 @@ public class ConexionBaseDeDatos {
         } catch (SQLException ex) {
             throw new Exception("Error de Conexion \n Codigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
         }
-
     }
 
     public int actualizar(PreparedStatement sql_st) throws Exception {
@@ -79,7 +69,7 @@ public class ConexionBaseDeDatos {
 
     public ResultSet consultar(PreparedStatement sentencia) throws Exception {
         try {
-            ResultSet filasBD = sentencia.executeQuery(); // solo para Select
+            ResultSet filasBD = sentencia.executeQuery();
             return filasBD;
         } catch (SQLException ex) {
             throw new SQLException("Error al ejecutar sentencia BD Conexion "
@@ -105,7 +95,6 @@ public class ConexionBaseDeDatos {
         }
     }
 
-    // Setters
     public void setDriver(String driver) {
         this.driver = driver;
     }
@@ -146,7 +135,6 @@ public class ConexionBaseDeDatos {
         this.rows = rows;
     }
 
-    // Getters
     public String getDriver() {
         return driver;
     }
@@ -186,5 +174,4 @@ public class ConexionBaseDeDatos {
     public ResultSet getRows() {
         return rows;
     }
-
 }

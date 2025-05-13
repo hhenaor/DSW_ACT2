@@ -1,10 +1,10 @@
-<%-- 
-    Document   : register
-    Created on : 12 may 2025, 17:28:35
-    Author     : horahenaripo
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (request.getSession().getAttribute("login") != null) {
+        response.sendRedirect("router.jsp?msg=Ya inicio sesion&redir_to=dashboard.jsp");
+        return; 
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

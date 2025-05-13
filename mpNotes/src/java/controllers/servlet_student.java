@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controllers;
 
 import java.io.IOException;
@@ -17,10 +13,6 @@ import models.CRUDstudent;
 import models.ConexionBaseDeDatos;
 import models.student;
 
-/**
- *
- * @author horahenaripo
- */
 @WebServlet (name="servlet_student", urlPatterns = {"/student"})
 public class servlet_student extends HttpServlet {
 
@@ -32,7 +24,7 @@ public class servlet_student extends HttpServlet {
         
         try {
 
-            String accion = request.getParameter("request"); // CAPTURAR LA ACCION
+            String accion = request.getParameter("request");
 
                 ConexionBaseDeDatos conexion = new ConexionBaseDeDatos();
                 CRUDstudent crudEstudiante = new CRUDstudent(conexion);
@@ -95,6 +87,16 @@ public class servlet_student extends HttpServlet {
 
                         response.sendRedirect("router.jsp?msg=Sesion cerrada&redir_to=login.jsp"); 
 
+                    } else if (accion.equals("delete_user")) {
+
+                        HttpSession session = request.getSession();
+                        Object loginAttribute = session.getAttribute("login");
+                        crudEstudiante.eliminarStudent(((student) loginAttribute).getUsername());
+                        session.setAttribute("login", null);
+                        session.invalidate();
+
+                        response.sendRedirect("router.jsp?msg=Usuario eliminado y sesion cerrado&redir_to=login.jsp"); 
+
                     } else {
 
                         response.sendRedirect("router.jsp?msg=La Accion Solicitada no es Correcta&redir_to=login.jsp");
@@ -108,43 +110,21 @@ public class servlet_student extends HttpServlet {
             }
         }
     
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
         
 }
