@@ -75,8 +75,6 @@ public class servlet_student extends HttpServlet {
                         session.setAttribute("student.listar", listado);
 
                         response.sendRedirect("dashboard.jsp?req=lists"); 
-                        
-                        return;
 
                     } else if (accion.equals("login")) {
 
