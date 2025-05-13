@@ -1,34 +1,46 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mensaje del Sistema</title>
-    <%
-        String msg = request.getParameter("msg");
-        String redirTo = request.getParameter("redir_to");
 
-        String destinoUrl = (redirTo != null && !redirTo.isEmpty()) ? redirTo : "login.jsp";
-    %>
-    <script>
-        function autoRedirect() { window.location.href = '<%= destinoUrl %>'; }
-        setTimeout(autoRedirect, 5000);
-    </script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mensaje del sistema</title>
+        <%
+            String msg = request.getParameter("msg");
+            String redirTo = request.getParameter("redir_to");
+            String destinoUrl = (redirTo != null && !redirTo.isEmpty()) ? redirTo : "login.jsp";
+        %>
+        <script>
+            function autoRedirect() {
+                window.location.href = '<%= destinoUrl%>';
+            }
+            setTimeout(autoRedirect, 5000);
+        </script>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
 
-    <h1>Mensaje del sistema</h1>
+    <body>
 
-    <%
-        if (msg != null && !msg.isEmpty()) {
-            out.println("<p style=\"color: darkblue;\">" + msg + "</p><hr>");
-        } else {
-            out.println("<p style=\"color: darkblue;\">No se establecio un mensaje</p><hr>");
-        }
-    %>
+        <h1>mpNotes</h1>
 
-    <p>Seras redireccionado en unos momentos</p>
-    <p><a href="<%= destinoUrl %>">Haz clic aqui para ir ahora.</a></p>
+        <div class="focus">
 
-</body>
+            <h2>Mensaje del sistema</h2>
+
+            <%
+                if (msg != null && !msg.isEmpty()) {
+                    out.println("<p>" + msg + "</p>");
+                } else {
+                    out.println("<p>No se establecio un mensaje</p>");
+                }
+            %>
+
+            <hr>
+
+            <p>Seras redireccionado en unos momentos. <a href="<%= destinoUrl%>">Haz clic aqui para ir ahora.</a></p>
+
+        </div>
+
+    </body>
+
 </html>

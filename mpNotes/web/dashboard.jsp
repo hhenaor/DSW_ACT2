@@ -6,33 +6,35 @@
     }
 %>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-        <h2>Menu de la Aplicacion</h2>
-        <p>Control de cursos</p>
-        <table border="1">
-            <tr>
-                <td><h1><a href="dash/create.jsp">Agregar</a></h1></td>
-            </tr>
-            <tr>
-                <td><h1><a href="dash/remove.jsp">Eliminar</a></h1></td>
-            </tr>
-            <tr>
-                <td><h1><a href="dash/update.jsp">Modificar</a></h1></td>
-            </tr>
-            <tr>
-                <td><h1><a href="dash/search.jsp">Buscar</a></h1></td>
-            </tr>
-            <tr>
-                <td><h1><a href="<%= request.getContextPath() %>/student?request=exit">Cerrar sesion</a></h1></td>
-            </tr>
-            <tr>
-                <td><h1><a href="<%= request.getContextPath() %>/student?request=delete_user">Eliminar usuario</a></h1></td>
-            </tr>
-        </table>
-</body>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+
+    <body>
+
+        <h1>mpNotes</h1>
+
+        <div class="focus">
+
+            <h2>Menu de la aplicacion</h2>
+            <h5>Control de cursos</h5>
+
+            <h3><a href="dash/create.jsp">Agregar curso</a></h3>
+            <h3><a href="dash/remove.jsp">Eliminar curso</a></h3>
+            <h3><a href="dash/update.jsp">Modificar curso</a></h3>
+            <h3><a href="dash/search.jsp">Buscar curso</a></h3>
+
+            <hr>
+
+            <h3><a href="<%= request.getContextPath()%>/student?request=exit">Cerrar sesion</a></h3>
+            <h3><a href="<%= request.getContextPath()%>/student?request=delete_user">Eliminar usuario</a></h3>
+
+        </div>
+
+    </body>
+
 </html>

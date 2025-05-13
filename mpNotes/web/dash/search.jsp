@@ -1,67 +1,69 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Buscar Curso</title>
-</head>
-<body>
 
-    <h2>Buscar Curso</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Buscar curso</title>
+        <link rel="stylesheet" href="../style.css"/>
+    </head>
 
-    <form action="<%= request.getContextPath() %>/course" method="post">
+    <body>
 
-        <p>Para buscar un curso por su ID exacto, es recomendable dejar los otros campos vacíos. Si llenas otros campos, todos deben coincidir para encontrar el curso.</p>
-        <div>
-            <label for="courseId">Buscar por ID del Curso:</label>
-            <input type="number" id="courseId" name="course_id" min="1">
-        </div>
-        <hr>
+        <h1>mpNotes</h1>
 
-        <div>
-            <label for="name">Buscar por Nombre Corto:</label>
-            <input type="text" id="name" name="name">
-        </div>
-        <br>
+        <form action="<%= request.getContextPath()%>/course" method="post">
 
-        <div>
-            <label for="fullName">Buscar por Nombre Completo:</label>
-            <input type="text" id="fullName" name="full_name">
-        </div>
-        <br>
+            <h2>Buscar curso</h2>
 
-        <div>
-            <label for="knowledgeArea">Buscar por Area de Conocimiento:</label>
-            <input type="text" id="knowledgeArea" name="knowledge_area">
-        </div>
-        <br>
+            <!--p>Para buscar un curso por su ID exacto, es recomendable dejar los otros campos vacios. Si llenas otros campos, todos deben coincidir para encontrar el curso.</p>
 
-        <div>
-            <label for="credits">Buscar por Numero de Creditos</label>
-            <input type="text" id="credits" name="credits">
-        </div>
-        <br>
+            <div>
+                <label for="courseId">Buscar por ID del curso:</label>
+                <input type="number" id="courseId" name="course_id" min="1" placeholder="ID exacto si lo sabes">
+            </div>
+            
+            <hr-->
 
-        <div>
-            <label for="career">Buscar por Carrera:</label>
-            <input type="text" id="career" name="career">
-        </div>
-        <br>
+            <div>
+                <label for="name">Buscar por nombre corto:</label>
+                <input type="text" id="name" name="name" placeholder="Ej: cal">
+            </div>
 
-        <div>
-            <label for="professor">Buscar por Profesor:</label>
-            <input type="text" id="professor" name="professor">
-        </div>
-        <br>
+            <div>
+                <label for="fullName">Buscar por nombre completo:</label>
+                <input type="text" id="fullName" name="full_name" placeholder="Ej: calculo diferencial">
+            </div>
 
-        <input type="hidden" name="request" value="search">
+            <div>
+                <label for="knowledgeArea">Buscar por area de conocimiento:</label>
+                <input type="text" id="knowledgeArea" name="knowledge_area" placeholder="Ej: matematicas">
+            </div>
 
-        <button type="submit">Buscar</button>
+            <div>
+                <label for="credits">Buscar por numero de creditos:</label>
+                <input type="text" id="credits" name="credits" placeholder="Ej: 3">
+            </div>
 
-    </form>
+            <div>
+                <label for="career">Buscar por carrera:</label>
+                <input type="text" id="career" name="career" placeholder="Ej: software">
+            </div>
 
-    <br>
-    <p><a href="<%= request.getContextPath() %>/dashboard.jsp">regresar al dashboard</a></p>
+            <div>
+                <label for="professor">Buscar por profesor:</label>
+                <input type="text" id="professor" name="professor" placeholder="Ej: juan perez">
+            </div>
 
-</body>
+            <input type="hidden" name="request" value="search">
+            <button type="submit">Buscar curso</button>
+
+            <hr>
+
+            <p>No quieres buscar un curso? <a href="../dashboard.jsp">Regresa al menu</a></p>
+
+        </form>
+
+    </body>
+
 </html>

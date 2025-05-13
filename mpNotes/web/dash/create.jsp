@@ -1,77 +1,75 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Nuevo Curso</title>
-</head>
-<body>
 
-    <h2>Crear Nuevo Curso</h2>
-    <form action="<%= request.getContextPath() %>/course" method="post">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear nuevo curso</title>
+        <link rel="stylesheet" href="../style.css"/>
+    </head>
 
-        <div>
-            <label for="name">Nombre Corto:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <br>
+    <body>
 
-        <div>
-            <label for="fullName">Nombre Completo:</label>
-            <input type="text" id="fullName" name="full_name" required>
-        </div>
-        <br>
+        <h1>mpNotes</h1>
 
-        <div>
-            <label for="description">Descripcion:</label>
-            <textarea id="description" name="description" required></textarea>
-        </div>
-        <br>
+        <form action="<%= request.getContextPath()%>/course" method="post">
 
-        <div>
-            <label for="knowledgeArea">Area de Conocimiento:</label>
-            <input type="text" id="knowledgeArea" name="knowledge_area" required>
-        </div>
-        <br>
+            <h2>Crear nuevo curso</h2>
 
-        <div>
-            <label for="career">Carrera:</label>
-            <input type="text" id="career" name="career" required>
-        </div>
-        <br>
+            <div>
+                <label for="name">Nombre corto:</label>
+                <input type="text" id="name" name="name" required placeholder="Ingresa nombre corto del curso">
+            </div>
 
-        <div>
-            <label for="credits">Creditos:</label>
-            <input type="number" id="credits" name="credits" required min="0">
-        </div>
-        <br>
+            <div>
+                <label for="fullName">Nombre completo:</label>
+                <input type="text" id="fullName" name="full_name" required placeholder="Ingresa nombre completo del curso">
+            </div>
 
-        <div>
-            <label for="thematicContent">Contenido Tematico:</label>
-            <textarea id="thematicContent" name="thematic_content" required></textarea>
-        </div>
-        <br>
+            <div>
+                <label for="description">Descripcion:</label>
+                <textarea id="description" name="description" required placeholder="Describe brevemente el curso"></textarea>
+            </div>
 
-        <div>
-            <label for="semester">Semestre:</label>
-            <input type="text" id="semester" name="semester" required>
-        </div>
-        <br>
+            <div>
+                <label for="knowledgeArea">Area de conocimiento:</label>
+                <input type="text" id="knowledgeArea" name="knowledge_area" required placeholder="Ej: Matematicas, Fisica, etc">
+            </div>
 
-        <div>
-            <label for="professor">Profesor:</label>
-            <input type="text" id="professor" name="professor" required>
-        </div>
-        <br>
+            <div>
+                <label for="career">Carrera:</label>
+                <input type="text" id="career" name="career" required placeholder="Ej: Ingenieria de Software">
+            </div>
 
-        <input type="hidden" name="request" value="insert">
+            <div>
+                <label for="credits">Creditos:</label>
+                <input type="number" id="credits" name="credits" required min="0" placeholder="Numero de creditos">
+            </div>
 
-        <button type="submit">Guardar Curso</button>
+            <div>
+                <label for="thematicContent">Contenido tematico:</label>
+                <textarea id="thematicContent" name="thematic_content" required placeholder="Describe los temas del curso"></textarea>
+            </div>
 
-    </form>
+            <div>
+                <label for="semester">Semestre:</label>
+                <input type="text" id="semester" name="semester" required placeholder="Ej: 1, 2, 3...">
+            </div>
 
-    <br>
-    <p><a href="../dashboard.jsp">regresar al dashboard</a></p>
+            <div>
+                <label for="professor">Profesor:</label>
+                <input type="text" id="professor" name="professor" required placeholder="Nombre del profesor asignado">
+            </div>
 
-</body>
+            <input type="hidden" name="request" value="insert">
+            <button type="submit">Guardar curso</button>
+
+            <hr>
+
+            <p>No quieres registrar un curso? <a href="../dashboard.jsp">Regresa al menu</a></p>
+
+        </form>
+
+    </body>
+
 </html>

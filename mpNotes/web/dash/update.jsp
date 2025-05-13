@@ -1,88 +1,80 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
+
     <head>
         <meta charset="UTF-8">
-        <title>Modificar Curso</title>
+        <title>Modificar curso</title>
+        <link rel="stylesheet" href="../style.css"/>
     </head>
+
     <body>
 
-        <h2>Modificar Curso</h2>
+        <h1>mpnotes</h1>
 
         <form action="<%= request.getContextPath()%>/course" method="post">
 
-            <div>
-                <label for="courseId">ID del Curso a Modificar:</label>
-
-                <input type="number" id="courseId" name="course_id">
-
-                <p>no sabes que id es? <a href="search.jsp">buscalo aqui</a></p>
-
-            </div>
-            <br>
+            <h2>Modificar curso</h2>
 
             <div>
-                <label for="name">Nombre Corto:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="courseId">Ingresa el ID del curso a modificar:</label>
+                <input type="number" id="courseId" name="course_id" placeholder="5">
+                <p>No sabes cual es el ID? Puedes buscarlo <a href="search.jsp">aqui</a></p>
             </div>
-            <br>
 
             <div>
-                <label for="fullName">Nombre Completo:</label>
-                <input type="text" id="fullName" name="full_name" required>
+                <label for="name">Nombre corto:</label>
+                <input type="text" id="name" name="name" required placeholder="Cal">
             </div>
-            <br>
+
+            <div>
+                <label for="fullName">Nombre completo:</label>
+                <input type="text" id="fullName" name="full_name" required placeholder="Calculo diferencial">
+            </div>
 
             <div>
                 <label for="description">Descripcion:</label>
-                <textarea id="description" name="description" required></textarea>
+                <textarea id="description" name="description" required placeholder="Resumen del curso"></textarea>
             </div>
-            <br>
 
             <div>
-                <label for="knowledgeArea">Area de Conocimiento:</label>
-                <input type="text" id="knowledgeArea" name="knowledge_area" required>
+                <label for="knowledgeArea">Area de conocimiento:</label>
+                <input type="text" id="knowledgeArea" name="knowledge_area" required placeholder="Matematicas">
             </div>
-            <br>
 
             <div>
-                <label for="career">Carrera:</label>
-                <input type="text" id="career" name="career" required>
+                <label for="career">Carrera asociada:</label>
+                <input type="text" id="career" name="career" required placeholder="Software">
             </div>
-            <br>
 
             <div>
                 <label for="credits">Creditos:</label>
-                <input type="number" id="credits" name="credits" required min="0">
+                <input type="number" id="credits" name="credits" required min="0" placeholder="3">
             </div>
-            <br>
 
             <div>
-                <label for="thematicContent">Contenido Tematico:</label>
-                <textarea id="thematicContent" name="thematic_content" required></textarea>
+                <label for="thematicContent">Contenido tematico:</label>
+                <textarea id="thematicContent" name="thematic_content" required placeholder="Temas del curso"></textarea>
             </div>
-            <br>
 
             <div>
                 <label for="semester">Semestre:</label>
-                <input type="text" id="semester" name="semester" required>
+                <input type="text" id="semester" name="semester" required placeholder="Segundo">
             </div>
-            <br>
 
             <div>
-                <label for="professor">Profesor:</label>
-                <input type="text" id="professor" name="professor" required>
+                <label for="professor">Nombre del profesor:</label>
+                <input type="text" id="professor" name="professor" required placeholder="Juan perez">
             </div>
-            <br>
 
             <input type="hidden" name="request" value="update">
+            <button type="submit">Actualizar curso</button>
 
-            <button type="submit">Actualizar Curso</button>
+            <hr>
+            <p>No quieres actualizar un curso? <a href="../dashboard.jsp">Regresa al menu</a></p>
 
         </form>
 
-        <br>
-        <p><a href="<%= request.getContextPath()%>/dashboard.jsp">regresar al dashboard</a></p>
-
     </body>
+
 </html>
