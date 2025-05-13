@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.hppsrc.mpnotes;
+package models;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +40,7 @@ public class CRUDstudent {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Agregar el Estudiante " + nuevoStudent.getUsername() + "\nExplicacion: " + ex.getMessage()); 
+            throw new Exception("Error al Agregar el Estudiante " + nuevoStudent.getUsername() + "\nExplicacion: " + ex.getMessage()); // Formato de error de la imagen
         } finally {
             this.conexion.desconectar();
         }
@@ -65,7 +65,7 @@ public class CRUDstudent {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Modificar el Estudiante " + studentAModificar.getUsername() + "\nExplicacion: " + ex.getMessage()); 
+            throw new Exception("Error al Modificar el Estudiante " + studentAModificar.getUsername() + "\nExplicacion: " + ex.getMessage()); // Formato de error de la imagen
         } finally {
             this.conexion.desconectar();
         }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.hppsrc.mpnotes;
+package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,9 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpSession;
+
+import models.CRUDstudent;
+import models.ConexionBaseDeDatos;
+import models.student;
 
 /**
  *
@@ -44,7 +47,7 @@ public class servlet_student extends HttpServlet {
                         student nuevoEstudiante = new student(username, password, name, email);
                         crudEstudiante.agregarStudent(nuevoEstudiante);
 
-                        response.sendRedirect("web/dashboard.jsp?msg=Estudiante " + username + " Agregado al Sistema"); 
+                        response.sendRedirect("router.jsp?msg=Estudiante " + username + " Agregado al Sistema&redir_to=login.jsp"); 
 
                     } else if (accion.equals("update")) {
 
@@ -56,14 +59,14 @@ public class servlet_student extends HttpServlet {
                         student studentAModificar = new student(username, password, name, email);
                         crudEstudiante.modificarStudent(studentAModificar);
 
-                        response.sendRedirect("web/dashboard.jsp?msg=Estudiante "+username+" Modificado en el Sistema"); 
+                        response.sendRedirect("router.jsp?msg=Estudiante "+username+" Modificado en el Sistema&redir_to=dashboard.jsp"); 
 
                     } else if (accion.equals("remove")) {
 
                         String username = request.getParameter("username");
                         crudEstudiante.eliminarStudent(username);
 
-                        response.sendRedirect("web/dashboard.jsp?msg=Estudiante "+username+" Eliminado del Sistema"); 
+                        response.sendRedirect("router.jsp?msg=Estudiante "+username+" Eliminado del Sistema&redir_to=dashboard.jsp"); 
 
                     } else if (accion.equals("list")) {
 
@@ -71,7 +74,9 @@ public class servlet_student extends HttpServlet {
                         HttpSession session = request.getSession();
                         session.setAttribute("student.listar", listado);
 
-                        response.sendRedirect("web/dashboard.jsp?req=list");
+                        response.sendRedirect("dashboard.jsp?req=lists"); 
+                        
+                        return;
 
                     } else if (accion.equals("login")) {
 
@@ -80,30 +85,27 @@ public class servlet_student extends HttpServlet {
                         student encontrado = CRUDstudent.iniciarSesion(username, password);
 
                         HttpSession session = request.getSession();
-                        session.setAttribute("student.login", encontrado);
+                        session.setAttribute("login", encontrado);
 
-                        response.sendRedirect("web/dashboard.jsp?msg=Bienvenido al Sistema");
+                        response.sendRedirect("dashboard.jsp");
 
                     } else if (accion.equals("exit")) {
 
                         HttpSession session = request.getSession();
-                        session.setAttribute("student.login", null);
+                        session.setAttribute("login", null);
                         session.invalidate();
 
-                        response.sendRedirect("web/index.jsp?msg=Sesion cerrada"); 
+                        response.sendRedirect("router.jsp?msg=Sesion cerrada&redir_to=login.jsp"); 
 
                     } else {
 
-                        // TODO redireccionar a pagina anterior con mensaje de error
-                        // tal vez hacer que esto lo haga otra cosa?
-                        response.sendRedirect("web/router.jsp?msg=La Accion Solicitada no es Correcta&redir_back=true");
+                        response.sendRedirect("router.jsp?msg=La Accion Solicitada no es Correcta&redir_to=login.jsp");
 
                     }
 
             } catch (Exception error) {
 
-                // TODO redireccionar a pagina anterior con mensaje de error
-                response.sendRedirect("web/router.jsp?mensaje="+error.getMessage()+"&redir_back=true");
+                response.sendRedirect("router.jsp?msg="+error.getMessage()+"&redir_to=login.jsp");
 
             }
         }
