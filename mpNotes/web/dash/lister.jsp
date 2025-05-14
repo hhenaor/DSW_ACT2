@@ -1,17 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="models.course"%>
 <%@page import="jakarta.servlet.http.HttpSession"%>
-<%@page import="java.net.URLDecoder"%>
-<%@page import="java.nio.charset.StandardCharsets"%>
 
 <%
     String msg = (String) request.getAttribute("msg");
 
     if (msg == null) {
         msg = request.getParameter("msg");
-        if (msg != null) {
-            msg = URLDecoder.decode(msg, StandardCharsets.UTF_8.toString());
-        }
     }
 
     course singleCourse = (course) request.getAttribute("singleCourse");
@@ -24,70 +19,51 @@
             courseList = (course[]) searchResultsAttribute;
         }
     }
+    
 %>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Resultados de Busqueda</title>
-</head>
-<body>
 
-    <h2>Resultados de Busqueda</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Resultados de Busqueda</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
 
-    <% if (msg != null && !msg.isEmpty()) { %>
-        <p><%= msg %></p>
-        <hr>
-    <% } %>
+    <body>
 
-    <% if (singleCourse != null) { %>
-        <h3>Detalles del Curso Encontrado:</h3>
-        <p><strong>ID:</strong> <%= singleCourse.getCourse_id() %></p>
-        <p><strong>Usuario ID:</strong> <%= singleCourse.getUser_id() %></p>
-        <p><strong>Nombre Corto:</strong> <%= singleCourse.getName() %></p>
-        <p><strong>Nombre Completo:</strong> <%= singleCourse.getFull_name() %></p>
-        <p><strong>Descripcion:</strong> <%= singleCourse.getDescription() %></p>
-        <p><strong>Area de Conocimiento:</strong> <%= singleCourse.getKnowledge_area() %></p>
-        <p><strong>Carrera:</strong> <%= singleCourse.getCareer() %></p>
-        <p><strong>Creditos:</strong> <%= singleCourse.getCredits() %></p>
-        <p><strong>Contenido Tematico:</strong> <%= singleCourse.getThematic_content() %></p>
-        <p><strong>Semestre:</strong> <%= singleCourse.getSemester() %></p>
-        <p><strong>Profesor:</strong> <%= singleCourse.getProfessor() %></p>
+        <h1>mpNotes</h1>
 
-    <% } else if (courseList != null && courseList.length > 0) { %>
-        <h3>Coincidencias Encontradas:</h3>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre Corto</th>
-                    <th>Nombre Completo</th>
-                    <th>Profesor</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (course c : courseList) { %>
-                    <tr>
-                        <td><%= c.getCourse_id() %></td>
-                        <td><%= c.getName() %></td>
-                        <td><%= c.getFull_name() %></td>
-                        <td><%= c.getProfessor() %></td>
-                        <td>
-                            <a href="<%= request.getContextPath() %>/course?request=single&course_id=<%= c.getCourse_id() %>">Ver Detalles</a>
-                        </td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+        <div class="focus">
 
-    <% } else { %>
-        <p>No se encontraron resultados para mostrar.</p>
-    <% } %>
+            <h2>Resultados de Busqueda</h2>
 
-    <br>
-    <p><a href="dash/search.jsp">hacer otra busqueda</a></p>
-    <p><a href="dashboard.jsp">regresar al dashboard</a></p>
+            <% if (msg != null && !msg.isEmpty()) {%>
+            <h5><%= msg%></h5>
+            <hr>
+            <% } %>
 
-</body>
+            <h3>Detalles del Curso Encontrado:</h3>
+            
+            <p><strong>ID de curso:</strong> <%= singleCourse.getCourse_id()%></p>
+            <p><strong>ID de usuario:</strong> <%= singleCourse.getUser_id()%></p>
+            <p><strong>Nombre corto:</strong> <%= singleCourse.getName()%></p>
+            <p><strong>Nombre completo:</strong> <%= singleCourse.getFull_name()%></p>
+            <p><strong>Descripcion:</strong> <%= singleCourse.getDescription()%></p>
+            <p><strong>Area de conocimiento:</strong> <%= singleCourse.getKnowledge_area()%></p>
+            <p><strong>Carrera:</strong> <%= singleCourse.getCareer()%></p>
+            <p><strong>Creditos:</strong> <%= singleCourse.getCredits()%></p>
+            <p><strong>Contenido tematico:</strong> <%= singleCourse.getThematic_content()%></p>
+            <p><strong>Semestre:</strong> <%= singleCourse.getSemester()%></p>
+            <p><strong>Profesor:</strong> <%= singleCourse.getProfessor()%></p>
+
+            <hr>
+            
+            <p><a href="dash/search.jsp">Hacer otra busqueda</a></p>
+            <p><a href="dashboard.jsp">Regresar al menu principal</a></p>
+
+        </div>
+
+    </body>
+
 </html>

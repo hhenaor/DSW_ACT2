@@ -31,7 +31,7 @@
             <hr>
 
             <h3><a href="<%= request.getContextPath()%>/student?request=exit">Cerrar sesion</a></h3>
-            <h3><a href="<%= request.getContextPath()%>/student?request=delete_user">Eliminar usuario</a></h3>
+            <h3><a href="<%= request.getContextPath()%>/student?request=remove">Eliminar usuario</a></h3>
 
         </div>
 

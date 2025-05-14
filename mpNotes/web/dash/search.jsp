@@ -40,10 +40,10 @@
                 <input type="text" id="knowledgeArea" name="knowledge_area" placeholder="Ej: matematicas">
             </div>
 
-            <div>
+            <!--div>
                 <label for="credits">Buscar por numero de creditos:</label>
                 <input type="text" id="credits" name="credits" placeholder="Ej: 3">
-            </div>
+            </div--->
 
             <div>
                 <label for="career">Buscar por carrera:</label>
