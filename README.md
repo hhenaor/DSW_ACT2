@@ -2,17 +2,11 @@
 
 ## mpNotes (JSP version)
 
-Simple free, open source grades taking app made with JAVA/JSP and Tomcat
+Simple free, open source grades taking app made with JAVA/JSP and Glassfish
 
 ## Requirements
 
-- JAVA JDK 17 or higher
-- Apache Tomcat 11.0 or higher
-
-## Notes
-
-This project is built based on the root directory of your Tomcat installation.
-Path: <<tomcat installation path>>/webapps/root/
+wip
 
 ## License
 
