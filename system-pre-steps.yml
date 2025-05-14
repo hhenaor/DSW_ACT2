@@ -1,0 +1,5 @@
+steps:
+- checkout: self
+  inputs:
+    repository: self
+    fetchDepth: 1
