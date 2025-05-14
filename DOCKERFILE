@@ -1,0 +1,9 @@
+FROM glassfish/server:7.0.15-jdk17
+
+LABEL maintainer="hppsrc"
+
+EXPOSE 8080 4848
+
+ARG WAR_FILE_PATH=dist\mpnotes_java.war
+
+COPY ${WAR_FILE_PATH} ${GLASSFISH_HOME}/glassfish/domains/domain1/autodeploy/
