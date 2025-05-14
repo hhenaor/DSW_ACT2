@@ -1,21 +1,22 @@
-# Ant
-# Build your Java projects and run tests with Apache Ant.
-# Add steps that save build artifacts and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
+
+variables:
+  ANT_HOME: '/usr/share/ant'
+  JAVA_HOME: '/usr/lib/jvm/java-11-openjdk-amd64'
 
 steps:
-- task: Ant@1
-  inputs:
-    workingDirectory: ''
-    buildFile: 'build.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '11'
+      jdkArchitecture: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
+  - task: Ant@1
+    inputs:
+      buildFile: 'build.xml'
+      targets: 'compile'
+      publishJUnitResults: false
