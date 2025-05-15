@@ -18,13 +18,14 @@ public class ConexionBaseDeDatos {
     private Connection conexion;
     private PreparedStatement sql_st;
     private ResultSet rows;
-
+    
     public ConexionBaseDeDatos() throws Exception {
         url = url + ip + ":" + port + "/" + db;
         this.conectar();
     }
 
     public ConexionBaseDeDatos(
+            
             String driver,
             String ip,
             String url,
@@ -32,6 +33,7 @@ public class ConexionBaseDeDatos {
             String user,
             String pass,
             String db
+            
     ) throws Exception {
 
         this.driver = driver;
@@ -43,56 +45,69 @@ public class ConexionBaseDeDatos {
         this.db = db;
 
         this.conectar();
+        
     }
-
+    
     public void conectar() throws Exception {
+        
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            throw new Exception("Error de Driver " + ex.getMessage());
+            throw new Exception("Ocurrio un error con el driver: " + ex.getMessage());
         }
+        
         try {
             conexion = DriverManager.getConnection(url, user, pass);
         } catch (SQLException ex) {
-            throw new Exception("Error de Conexion \n Codigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new Exception("SQL Error\n Codigo:" + ex.getErrorCode() + "\n" + ex.getMessage());
         }
+        
     }
 
     public int actualizar(PreparedStatement sql_st) throws Exception {
+        
         try {
+            
             int res = sql_st.executeUpdate();
             return res;
+            
         } catch (SQLException ex) {
-            throw new SQLException("Error al ejecutar sentencia BD Conexion \n Codigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new SQLException("SQL Error\n Codigo:" + ex.getErrorCode() + "\n" + ex.getMessage());
         }
+        
     }
 
     public ResultSet consultar(PreparedStatement sentencia) throws Exception {
+        
         try {
             ResultSet filasBD = sentencia.executeQuery();
             return filasBD;
         } catch (SQLException ex) {
-            throw new SQLException("Error al ejecutar sentencia BD Conexion "
-                    + ex.getMessage());
+            throw new SQLException("SQL Error\n" + ex.getMessage());
         }
+        
     }
 
     public void desconectar() {
+        
         try {
             conexion.close();
         } catch (SQLException ex) {
         } finally {
             conexion = null;
         }
+        
     }
 
     public PreparedStatement crearSentencia(String sql) throws Exception {
+        
         try {
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             return sentencia;
         } catch (SQLException ex) {
-            throw new SQLException("Error de Sentencia DB \n Codigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new SQLException("SQL Error\n Codigo:" + ex.getErrorCode() + "\n" + ex.getMessage());
         }
+        
     }
 
     public void setDriver(String driver) {
@@ -174,4 +189,5 @@ public class ConexionBaseDeDatos {
     public ResultSet getRows() {
         return rows;
     }
+    
 }

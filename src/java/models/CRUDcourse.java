@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CRUDcourse {
 
-    private ConexionBaseDeDatos conexion;
+    private final ConexionBaseDeDatos conexion;
 
     public CRUDcourse(ConexionBaseDeDatos conexion) {
         this.conexion = conexion;
@@ -25,7 +25,7 @@ public class CRUDcourse {
                 || nuevoCourse.getThematic_content() == null || nuevoCourse.getThematic_content().isEmpty()
                 || nuevoCourse.getSemester() == null || nuevoCourse.getSemester().isEmpty()
                 || nuevoCourse.getProfessor() == null || nuevoCourse.getProfessor().isEmpty()) {
-            throw new Exception("Todos los campos del curso son necesarios para agregar");
+            throw new Exception("Hay campos vacios, todos son necesarios para crear el curso");
         }
 
         String sqlInsert = "INSERT INTO courses (user_id, name, full_name, description, knowledge_area, career, credits, thematic_content, semester, professor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -33,6 +33,7 @@ public class CRUDcourse {
         PreparedStatement sentenciaSQL = null;
 
         try {
+            
             sentenciaSQL = this.conexion.crearSentencia(sqlInsert);
 
             sentenciaSQL.setString(1, nuevoCourse.getUser_id());
@@ -49,21 +50,23 @@ public class CRUDcourse {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Agregar el Curso " + nuevoCourse.getName() + "\nExplicacion: " + ex.getMessage(), ex);
+            throw new Exception("Error al agregar el curso " + nuevoCourse.getName() + "\n" + ex.getMessage());
         } finally {
+            
             if (sentenciaSQL != null) {
                 try {
                     sentenciaSQL.close();
                 } catch (SQLException e) {
                 }
             }
+            
         }
     }
 
     public void modificarCourse(course courseAModificar) throws Exception {
 
         if (courseAModificar.getCourse_id() <= 0) {
-            throw new Exception("El ID del Curso es Necesario para Modificar");
+            throw new Exception("Falta la ID del curso para actualizar");
         }
 
         String sqlUpdate = "UPDATE courses SET user_id = ?, name = ?, full_name = ?, description = ?, knowledge_area = ?, career = ?, credits = ?, thematic_content = ?, semester = ?, professor = ? WHERE course_id = ?";
@@ -71,6 +74,7 @@ public class CRUDcourse {
         PreparedStatement sentenciaSQL = null;
 
         try {
+            
             sentenciaSQL = this.conexion.crearSentencia(sqlUpdate);
 
             sentenciaSQL.setString(1, courseAModificar.getUser_id());
@@ -88,21 +92,23 @@ public class CRUDcourse {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Modificar el Curso " + courseAModificar.getName() + "\nExplicacion: " + ex.getMessage(), ex);
+            throw new Exception("Error al modificar el curso " + courseAModificar.getName() + "\n" + ex.getMessage());
         } finally {
+            
             if (sentenciaSQL != null) {
                 try {
                     sentenciaSQL.close();
                 } catch (SQLException e) {
                 }
             }
+            
         }
     }
 
     public void eliminarCourse(int courseId) throws Exception {
 
         if (courseId <= 0) {
-            throw new Exception("El ID del Curso es Necesario para Eliminar");
+            throw new Exception("Falta la ID del curso para eliminar");
         }
 
         String sqlDelete = "DELETE FROM courses WHERE course_id = ?";
@@ -117,20 +123,23 @@ public class CRUDcourse {
             this.conexion.actualizar(sentenciaSQL);
 
         } catch (Exception ex) {
-            throw new Exception("Error al Eliminar el Curso con ID " + courseId + "\nExplicacion: " + ex.getMessage(), ex);
+            throw new Exception("Error al eliminar el curso con ID " + courseId + "\n" + ex.getMessage());
         } finally {
+            
             if (sentenciaSQL != null) {
                 try {
                     sentenciaSQL.close();
                 } catch (SQLException e) {
                 }
             }
+            
         }
     }
 
     public static course consultarCourse(int courseId) throws Exception {
+        
         if (courseId <= 0) {
-            throw new Exception("El ID del Curso es Necesario para Consultar");
+            throw new Exception("Falta la ID del curso para buscar");
         }
 
         String sqlSelect = "SELECT course_id, user_id, name, full_name, description, knowledge_area, career, credits, thematic_content, semester, professor FROM courses WHERE course_id = ?";
@@ -141,6 +150,7 @@ public class CRUDcourse {
         ConexionBaseDeDatos conexionLocal = null;
 
         try {
+            
             conexionLocal = new ConexionBaseDeDatos();
             sentenciaSQL = conexionLocal.crearSentencia(sqlSelect);
             sentenciaSQL.setInt(1, courseId);
@@ -148,46 +158,59 @@ public class CRUDcourse {
             resultado = conexionLocal.consultar(sentenciaSQL);
 
             if (resultado.next()) {
+                
                 encontrado = new course(
-                        resultado.getInt("course_id"),
-                        resultado.getString("user_id"),
-                        resultado.getString("name"),
-                        resultado.getString("full_name"),
-                        resultado.getString("description"),
-                        resultado.getString("knowledge_area"),
-                        resultado.getString("career"),
-                        resultado.getInt("credits"),
-                        resultado.getString("thematic_content"),
-                        resultado.getString("semester"),
-                        resultado.getString("professor")
+                    resultado.getInt("course_id"),
+                    resultado.getString("user_id"),
+                    resultado.getString("name"),
+                    resultado.getString("full_name"),
+                    resultado.getString("description"),
+                    resultado.getString("knowledge_area"),
+                    resultado.getString("career"),
+                    resultado.getInt("credits"),
+                    resultado.getString("thematic_content"),
+                    resultado.getString("semester"),
+                    resultado.getString("professor")
                 );
+                
             }
+            
             return encontrado;
 
         } catch (Exception ex) {
-            throw new Exception("Error al consultar curso con ID " + courseId + ": " + ex.getMessage(), ex);
+            throw new Exception("Error al consultar curso con ID " + courseId + "\n" + ex.getMessage(), ex);
         } finally {
+            
             if (resultado != null) {
+                
                 try {
                     resultado.close();
                 } catch (SQLException e) {
                 }
+                
             }
+            
             if (sentenciaSQL != null) {
+                
                 try {
                     sentenciaSQL.close();
                 } catch (SQLException e) {
                 }
+                
             }
+            
             if (conexionLocal != null) {
                 conexionLocal.desconectar();
             }
+            
         }
+        
     }
 
     public static course[] courseFinder(course searchCriteria, String userId) throws Exception {
+        
         if (userId == null || userId.isEmpty()) {
-            throw new Exception("El ID de Usuario es Necesario para la Busqueda");
+            throw new Exception("Falta la ID del curso para buscar");
         }
 
         StringBuilder sqlSelect = new StringBuilder("SELECT course_id, user_id, name, full_name, description, knowledge_area, career, credits, thematic_content, semester, professor FROM courses WHERE user_id = ?");
@@ -198,6 +221,7 @@ public class CRUDcourse {
         parameters[paramCount++] = userId;
 
         if (searchCriteria != null) {
+            
             if (searchCriteria.getCourse_id() > 0) {
                 sqlSelect.append(" AND course_id = ?");
                 parameters[paramCount++] = searchCriteria.getCourse_id();
@@ -214,8 +238,8 @@ public class CRUDcourse {
             }
 
             if (searchCriteria.getDescription() != null && !searchCriteria.getDescription().isEmpty()) {
-                 sqlSelect.append(" AND description LIKE ?");
-                 parameters[paramCount++] = "%" + searchCriteria.getDescription() + "%";
+                sqlSelect.append(" AND description LIKE ?");
+                parameters[paramCount++] = "%" + searchCriteria.getDescription() + "%";
             }
 
             if (searchCriteria.getKnowledge_area() != null && !searchCriteria.getKnowledge_area().isEmpty()) {
@@ -242,6 +266,7 @@ public class CRUDcourse {
                 sqlSelect.append(" AND professor LIKE ?");
                 parameters[paramCount++] = "%" + searchCriteria.getProfessor() + "%";
             }
+            
         }
 
         ResultSet resultado = null;
@@ -250,6 +275,7 @@ public class CRUDcourse {
         ConexionBaseDeDatos conexionLocal = null;
 
         try {
+            
             conexionLocal = new ConexionBaseDeDatos();
             sentenciaSQL = conexionLocal.crearSentencia(sqlSelect.toString());
 
@@ -260,42 +286,56 @@ public class CRUDcourse {
             resultado = conexionLocal.consultar(sentenciaSQL);
 
             while (resultado.next()) {
+                
                 course encontrado = new course(
-                        resultado.getInt("course_id"),
-                        resultado.getString("user_id"),
-                        resultado.getString("name"),
-                        resultado.getString("full_name"),
-                        resultado.getString("description"),
-                        resultado.getString("knowledge_area"),
-                        resultado.getString("career"),
-                        resultado.getInt("credits"),
-                        resultado.getString("thematic_content"),
-                        resultado.getString("semester"),
-                        resultado.getString("professor")
+                        
+                    resultado.getInt("course_id"),
+                    resultado.getString("user_id"),
+                    resultado.getString("name"),
+                    resultado.getString("full_name"),
+                    resultado.getString("description"),
+                    resultado.getString("knowledge_area"),
+                    resultado.getString("career"),
+                    resultado.getInt("credits"),
+                    resultado.getString("thematic_content"),
+                    resultado.getString("semester"),
+                    resultado.getString("professor")
+                        
                 );
+                
                 coursesEncontrados.add(encontrado);
             }
 
-            return coursesEncontrados.toArray(new course[0]);
+            return coursesEncontrados.toArray(course[]::new);
 
         } catch (Exception ex) {
-            throw new Exception("Error al consultar los Cursos: " + ex.getMessage(), ex);
+            throw new Exception("Error al consultar los cursos: " + ex.getMessage(), ex);
         } finally {
+            
             if (resultado != null) {
+                
                 try {
                     resultado.close();
                 } catch (SQLException e) {
                 }
+                
             }
+            
             if (sentenciaSQL != null) {
+                
                 try {
                     sentenciaSQL.close();
                 } catch (SQLException e) {
                 }
+                
             }
+            
             if (conexionLocal != null) {
                 conexionLocal.desconectar();
             }
+            
         }
+        
     }
+    
 }

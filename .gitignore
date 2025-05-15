@@ -82,6 +82,7 @@ logs/
 .settings/
 
 # Configuración local o secretos
+script_build/
 src/main/resources/application-local.properties
 src/main/resources/application-dev.properties
 *.properties.local
