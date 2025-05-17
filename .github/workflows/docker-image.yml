@@ -7,23 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  get-glassfish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download GlassFish
-        run: |
-          wget https://download.eclipse.org/ee4j/glassfish/glassfish-6.2.5.zip
-          unzip glassfish-6.2.5.zip -d $HOME
-          echo "GlassFish installed at $HOME/glassfish6"
-      - name: Show GlassFish version
-        run: $HOME/glassfish6/bin/asadmin version
-
   build:
     runs-on: ubuntu-latest
-    needs: get-glassfish
+
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
@@ -39,8 +27,13 @@ jobs:
           unzip glassfish-7.0.24.zip -d $HOME
           echo "GlassFish installed at $HOME/glassfish7"
 
+      - name: Download NetBeans CopyLibs
+        run: |
+          mkdir -p lib
+          wget -O lib/org-netbeans-modules-java-j2seproject-copylibstask.jar https://repo1.maven.org/maven2/org/netbeans/modules/org-netbeans-modules-java-j2seproject-copylibstask/RELEASE170/org-netbeans-modules-java-j2seproject-copylibstask-RELEASE170.jar
+
       - name: Build WAR with Ant
-        run: ant war -Dj2ee.server.home=$HOME/glassfish7
+        run: ant war -Dj2ee.server.home=$HOME/glassfish7 -Dlibs.CopyLibs.classpath=lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
 
       - name: Prepare WAR for Docker
         run: |
