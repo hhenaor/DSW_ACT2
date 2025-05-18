@@ -40,9 +40,19 @@ jobs:
           cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar build/web/WEB-INF/lib/mysql-connector-j-9.2.0.jar
           mkdir -p lib/MYSQL
           cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar lib/MYSQL/mysql-connector-j-9.2.0.jar
+
+      - name: Download Jakarta EE dependencies
+        run: |
+          mkdir -p lib/jakartaee
+          
+          wget -O lib/jakartaee/jakarta.jakartaee-api-9.1.0.jar https://repo1.maven.org/maven2/jakarta/platform/jakarta.jakartaee-api/9.1.0/jakarta.jakartaee-api-9.1.0.jar
+          wget -O lib/jakartaee/jakarta.servlet-api-5.0.0.jar https://repo1.maven.org/maven2/jakarta/servlet/jakarta.servlet-api/5.0.0/jakarta.servlet-api-5.0.0.jar
+          
+          mkdir -p build/web/WEB-INF/lib/
+          cp lib/jakartaee/*.jar build/web/WEB-INF/lib/
           
       - name: Build WAR with Ant
-        run: ant war -Dj2ee.server.home=$HOME/glassfish7 -Dlibs.CopyLibs.classpath=lib/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.MYSQL.classpath=lib/MYSQL/mysql-connector-j-9.2.0.jar
+        run: ant war -Dj2ee.server.home=$HOME/glassfish7 -Dlibs.CopyLibs.classpath=lib/org-netbeans-modules-java-j2seproject-copylibstask.jar -Dlibs.MYSQL.classpath=lib/MYSQL/mysql-connector-j-9.2.0.jar -Dj2ee.platform.classpath=lib/jakartaee/jakarta.jakartaee-api-9.1.0.jar:lib/jakartaee/jakarta.servlet-api-5.0.0.jar
 
       - name: Prepare WAR for Docker
         run: |
