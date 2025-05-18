@@ -64,4 +64,4 @@ jobs:
           cp dist/app.war dist/mpnotes_java.war
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag dock_img_:$(date +%s)
+        run: docker build . --file Dockerfile --tag dock_img_$(date +%s)
