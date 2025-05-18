@@ -38,6 +38,8 @@ jobs:
           unzip mysql-connector-j-9.3.0.zip
           mkdir -p build/web/WEB-INF/lib
           mkdir -p web/WEB-INF/lib
+          # extra create parh
+          mkdir -p build/classes
           cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar build/web/WEB-INF/lib/mysql-connector-j-9.2.0.jar
           cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar web/WEB-INF/lib/mysql-connector-j-9.2.0.jar
           mkdir -p lib/MYSQL
