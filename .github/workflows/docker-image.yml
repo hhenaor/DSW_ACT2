@@ -66,11 +66,12 @@ jobs:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag docker_img
 
-      - name: Trigger Render deploy
+      - name: Tag and push to Docker Hub
         env:
-          RENDER_SERVICE_ID: srv-d0m95aggjchc739m1ta0?key=BmEMYQXS7Ec
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
         run: |
-          curl -X POST https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys \
-            -H "Authorization: Bearer $RENDER_API_KEY" \
-            -H "Accept: application/json"
+          echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+          docker tag docker_img $DOCKERHUB_USER/mpnotes_java:${{ github.sha }}
+          docker push $DOCKERHUB_USER/mpnotes_java:${{ github.sha }}
+
